@@ -1,0 +1,66 @@
+//Nitin Singh
+//21105117
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Nd
+{
+	public:
+	int data;
+	Nd *next;
+};
+void push1(Nd **head_ref, int data)
+{
+	Nd *ptr1 = new Nd();
+	Nd *temp = *head_ref;
+	ptr1->data = data;
+	ptr1->next = *head_ref;
+	if (*head_ref != NULL)
+	{
+		while (temp->next != *head_ref)      
+			temp = temp->next;
+		temp->next = ptr1;
+	}
+	else
+		ptr1->next = ptr1;
+
+	*head_ref = ptr1;
+}
+void printFun(Nd *head)
+{
+	Nd *temp = head;
+	if (head != NULL)
+	{
+		do
+		{
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		while (temp != head);
+	}
+}
+
+int main()
+{
+	Nd *head = NULL;
+	push1(&head, 15);
+	push1(&head, 50);
+	push1(&head, 20);
+	push1(&head, 10);
+
+	cout << "Result is:  ";
+	printFun(head);
+
+	return 0;
+}
+
+//In the above code the condition [while (temp->next != *head_ref) temp = temp->next;] states the traversal has reached the first element
+
+/*Ans 2
+> Round Robin scheduling technique in games.
+> Audio/Video Streaming - Example- Music Playlist
+> Circular Escalators
+> App Overview in phones -  The operating software keeps on iterating over running applications. 
+> Computer Networking: Circular linked list is also used in computer networking for token scheduling.
+> Computing Resources: Circular Linked Lists is used to manage the computing resources of the computer. */

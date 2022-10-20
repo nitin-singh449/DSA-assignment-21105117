@@ -1,0 +1,97 @@
+/*                         
+[Ans.1]
+An "In-Place" sorting algorithm is algorithm whose space complexity
+lies between O(1) and O(logn) both included.
+We can say an in-place algorithm is an algorithm that does need a
+small extra space and produces an output in the same memory that
+contains the data by transforming the input ‘in-place’.Where as an 
+"Out-Place" sorting algorithm is algorithm whose space complexity is 
+greater than O(logn). */
+
+//[Ans.2]
+#include <iostream>
+using namespace std;
+
+//Insertion Sort Using Out-Place Algorithm
+void insertion_sort_IP(int array[],int n){
+   
+    int i=0,j=i+1;
+    while(j<=n-1){
+        int temp=array[j];
+        while(i>=0){
+            if(array[i]>temp){
+                array[i+1]=array[i];
+                i--;
+            }
+            if(i==-1){array[0]=temp;break;}
+            if(array[i]<=temp){array[i+1]=temp;break;}
+        }
+        j++;
+        i=j-1;
+    }
+    return;
+}
+
+//Insertion Sort Using Out-Place Algorithm
+void insertion_sort_OP(int array[],int start,int end){
+   
+    if(start==end){return;}
+    int j=start+1;
+    int temp=array[j];
+    while(start>=0){
+        if(array[start]>temp){
+            array[start+1]=array[start];
+            start--;
+        }
+        if(start==-1){array[0]=temp;break;}
+        if(array[start]<=temp){array[start+1]=temp;break;}
+    }
+    insertion_sort_OP(array,start+1,end);
+}
+//Function to print array
+void pfun(int array[],int n){
+    for(int i=0;i<n;i++){cout<<array[i]<<" ";}
+}
+int main(){
+    int n;
+    
+    cout<<"Enter no of elements in array : ";
+    cin>>n;
+    int array[n],array2[n];
+    cout<<"Enter elements of array seperated by space : ";
+    for(int i=0;i<n;i++){cin>>array[i];}
+    //copying array to array2
+    for(int i=0;i<n;i++){array2[i]=array[i];}
+    cout<<endl;
+    cout<<"Array before sorting : ";pfun(array,n);
+   
+    insertion_sort_IP(array,n);
+    cout<<endl;
+    cout<<"Array after sorting using in-place : ";
+    pfun(array,n);
+    cout<<endl;
+   
+   
+    insertion_sort_OP(array2,0,n-1);
+    cout<<"Array after sorting using out-place : ";
+    //printing the array
+    pfun(array,n);
+    cout<<endl;
+
+}
+
+/*
+[ANS.3]
+In-place techniques have lesser space complexity but are difficult to 
+apply in algorithm whereas out-place techniques are easy to aplly but 
+increases the space complexity of algorithm.
+For exapmle if we want to reverse an array then its in-place algorithm
+will be swaping the first and last element of array until we reach the 
+middle of array,If we want to solve the same problem using out-place 
+algorithm we have to create one extra array of same size and copy 
+elements of original array from back to the front of new array,this 
+algorith increases the space complexity to O(n) as we have creaed an 
+extra array.
+IN-PLACE algorithm are used in Bubble sort, Selection Sort, Insertion Sort, Heapsort.
+NOT IN-PLACE algorithm is used in Merge Sort, Because merge sort requires O(n) extra space.
+*/
